@@ -15,15 +15,15 @@ interface SummaryStepProps {
 const SummaryStep: React.FC<SummaryStepProps> = (props) => {
   return (
     <div>
-      <div>
+      <ul>
         {Object.entries(props.collectedData).map(([key, value]) => {
           return (
-            <div key={key}>
+            <li key={key}>
               {key}: {value || 'N/A'}
-            </div>
+            </li>
           )
         })}
-      </div>
+      </ul>
       <div className="mt-4">
         <Link to={`/purchased/${props.productId}`}>
           <Button>Purchase</Button>
