@@ -1,22 +1,35 @@
-import React, { useState, ReactNode } from 'react'
+import React from 'react'
+
+import Button from '../../Button'
 
 interface StepWrapperProps {
-  cb: (field: string, value: any) => void
-  children: (value: any, onChange: (value: any) => void) => ReactNode
+  children: React.ReactNode
+  onNext: () => void
+  onPrev?: () => void
 }
 
-const StepWrapper = ({ cb, children }: StepWrapperProps) => {
-  const [fieldValue, setFieldValue] = useState('')
-
-  const handleInputChange = (value: any) => {
-    setFieldValue(value)
+const StepWrapper: React.FC<StepWrapperProps> = ({ children, ...props }) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    props.onNext()
   }
 
   return (
-    <div>
-      {children(fieldValue, handleInputChange)}
-      {/* <button onClick={() => cb()}>Next Step</button> */}
-    </div>
+    <form onSubmit={handleSubmit}>
+      {children}
+      <div className="flex gap-x-2">
+        {props.onPrev ? (
+          <Button
+            onClick={() => {
+              if (props.onPrev) props.onPrev()
+            }}
+          >
+            Previous
+          </Button>
+        ) : null}
+        <Button type="submit">Next</Button>
+      </div>
+    </form>
   )
 }
 

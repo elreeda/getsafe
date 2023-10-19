@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 
+import StepWrapper from './StepWrapper'
 import Input from '../../Input'
 
 interface EmailStepProps {
-  cb: (field: string, value: string) => void
+  onNext: (field: string, value: string) => void
+  onPrev?: () => void
 }
 
 const EmailStep: React.FC<EmailStepProps> = (props) => {
   const [email, setEmail] = useState('')
   return (
-    <>
+    <StepWrapper
+      onPrev={props.onPrev}
+      onNext={() => props.onNext('email', email)}
+    >
       <Input
         id="email"
         label="Email"
@@ -18,9 +23,9 @@ const EmailStep: React.FC<EmailStepProps> = (props) => {
         onChange={({ target: { value } }) => {
           setEmail(value)
         }}
+        required
       />
-      <button onClick={() => props.cb('email', email)}>Next</button>
-    </>
+    </StepWrapper>
   )
 }
 

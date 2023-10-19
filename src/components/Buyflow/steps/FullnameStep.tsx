@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 
+import StepWrapper from './StepWrapper'
 import Input from '../../Input'
 
 interface FullnameStepProps {
-  cb: (field: string, value: string) => void
+  onNext: (field: string, value: string) => void
+  onPrev?: () => void
 }
 
 const FullnameStep: React.FC<FullnameStepProps> = (props) => {
@@ -12,7 +14,10 @@ const FullnameStep: React.FC<FullnameStepProps> = (props) => {
     last: '',
   })
   return (
-    <>
+    <StepWrapper
+      onPrev={props.onPrev}
+      onNext={() => props.onNext('name', `${name.first} ${name.last}`)}
+    >
       <Input
         id="firstName"
         label="First name"
@@ -21,6 +26,7 @@ const FullnameStep: React.FC<FullnameStepProps> = (props) => {
         onChange={({ target: { value } }) => {
           setName({ ...name, first: value })
         }}
+        required
       />
       <Input
         id="lastName"
@@ -30,11 +36,9 @@ const FullnameStep: React.FC<FullnameStepProps> = (props) => {
         onChange={({ target: { value } }) => {
           setName({ ...name, last: value })
         }}
+        required
       />
-      <button onClick={() => props.cb('name', `${name.first} ${name.last}`)}>
-        Next
-      </button>
-    </>
+    </StepWrapper>
   )
 }
 

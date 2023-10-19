@@ -9,19 +9,21 @@ import logo from '../logo.svg'
 const AppRoutes = () => {
   return (
     <Router>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-      <Switch>
-        <Route path="/buy/insurance_dev">
-          <Insurance productId={ProductIds.devIns} />
-        </Route>
-        <Route path="/buy/insurance_designer">
-          <Insurance productId={ProductIds.designerIns} />
-        </Route>
-        <Route path="/purchased/:productId" component={Purchased} />
-        <Route path="/" component={Home} />
-      </Switch>
+      <div className="max-w-4xl px-12 mx-auto my-10">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+        </header>
+        <Switch>
+          <Route path="/buy/insurance_dev">
+            <Insurance productId={ProductIds.devIns} />
+          </Route>
+          <Route path="/buy/insurance_designer">
+            <Insurance productId={ProductIds.designerIns} />
+          </Route>
+          <Route path="/purchased/:productId" component={Purchased} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </div>
     </Router>
   )
 }

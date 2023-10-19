@@ -9,17 +9,15 @@ interface InsurancePageProps {
 }
 
 export const InsurancePage: React.FC<InsurancePageProps> = ({ productId }) => {
-  //   const navigate = useNavigate()
-
-  //   const handleFlowSubmit = useCallback(() => {
-  //     navigate(`${ROUTES.PURCHASED}/${productId}`)
-  //   }, [navigate, productId])
-
   return (
-    <>
-      <h2>Buying {PRODUCT_IDS_TO_NAMES[productId]}</h2>
-      <Buyflow productId={productId} />
-    </>
+    <div>
+      <h2 className="text-2xl font-semibold font-montserrat mt-8 mb-6">
+        Buying {PRODUCT_IDS_TO_NAMES[productId]}
+      </h2>
+      <div className="max-w-lg">
+        <Buyflow productId={productId} />
+      </div>
+    </div>
   )
 }
 
